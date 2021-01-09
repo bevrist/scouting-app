@@ -3,6 +3,7 @@ package main
 import (
 	"bytes"
 	"encoding/json"
+	"encoding/xml"
 	"fmt"
 	"io/ioutil"
 	"log"
@@ -63,12 +64,20 @@ func saveFormsToDisk() {
 
 //--------------------------------------------------------------------------------------
 
-//GetScoutingInfoHandler returns JSON list of all scouting data
-func GetScoutingInfoHandler(w http.ResponseWriter, r *http.Request) {
+//GetScoutingInfoJSONHandler returns JSON list of all scouting data
+func GetScoutingInfoJSONHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 	//marshal array of scouting forms to json and return
 	scoutListJSON, _ := json.Marshal(scoutFormList)
 	fmt.Fprint(w, string(scoutListJSON))
+}
+
+//GetScoutingInfoXMLHandler returns JSON list of all scouting data
+func GetScoutingInfoXMLHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	//marshal array of scouting forms to json and return
+	scoutListXML, _ := xml.Marshal(scoutFormList)
+	fmt.Fprint(w, string(scoutListXML))
 }
 
 //PostScoutingInfoHandler updates list of JSON scouting data with new entries and saves to disk
@@ -113,7 +122,9 @@ func main() {
 	//specify routes and start http server
 	r := mux.NewRouter()
 	r.HandleFunc("/apiVersion", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "{\"apiVersion\":"+apiVersion+"}") })
-	r.HandleFunc("/scoutInfo", GetScoutingInfoHandler).Methods(http.MethodGet, http.MethodHead)
+	r.HandleFunc("/scoutInfo/xml", GetScoutingInfoXMLHandler).Methods(http.MethodGet, http.MethodHead)
+	r.HandleFunc("/scoutInfo/json", GetScoutingInfoJSONHandler).Methods(http.MethodGet, http.MethodHead)
+	r.HandleFunc("/scoutInfo", GetScoutingInfoJSONHandler).Methods(http.MethodGet, http.MethodHead)
 	r.HandleFunc("/scoutInfo", PostScoutingInfoHandler).Methods(http.MethodPost)
 	r.HandleFunc("/healthz", func(w http.ResponseWriter, _ *http.Request) { fmt.Fprint(w, "ok") })
 	//serve static files, this is last to catch all requests not handled above
