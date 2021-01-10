@@ -72,12 +72,14 @@ func GetScoutingInfoJSONHandler(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, string(scoutListJSON))
 }
 
-//GetScoutingInfoXMLHandler returns JSON list of all scouting data
+//GetScoutingInfoXMLHandler returns XML list of all scouting data
 func GetScoutingInfoXMLHandler(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-	//marshal array of scouting forms to json and return
+	//marshal array of scouting forms to XML
 	scoutListXML, _ := xml.Marshal(scoutFormList)
-	fmt.Fprint(w, string(scoutListXML))
+	//add array object to root of document to make valid XML
+	outputXML := "<ScoutList>" + string(scoutListXML) + "</ScoutList>"
+	fmt.Fprint(w, outputXML)
 }
 
 //PostScoutingInfoHandler updates list of JSON scouting data with new entries and saves to disk
