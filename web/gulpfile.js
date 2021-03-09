@@ -5,21 +5,14 @@ console.log("gulp");
 const gulp = require("gulp");
 console.log("gulp-compile-handlebars");
 const handlebars = require("gulp-compile-handlebars");
-console.log("gulp-postcss");
-const postcss = require("gulp-postcss");
+console.log("gulp-sass");
+const sass = require("gulp-sass");
 console.log("gulp-rename");
 const rename = require("gulp-rename");
-console.log("autoprefixer");
-const autoprefixer = require("autoprefixer");
-console.log("precss");
-const precss = require("precss");
-console.log("tailwindcss");
-const tailwindcss = require("tailwindcss");
 console.log("workbox-build");
 const workboxBuild = require("workbox-build");
 console.log("loaded!");
 
-var tailwindConfig = require("./tailwind.config.js");
 var workboxConfig = require("./workbox-config.js");
 
 // define gulp tasks
@@ -35,14 +28,20 @@ gulp.task("minimize_css", () => {
 
 gulp.task("process_css", () => {
   return gulp
-    .src("src/css/**/*.css")
-    .pipe(postcss([precss(), tailwindcss(tailwindConfig), autoprefixer()]))
+    .src("src/scss/**/*.scss")
+    .pipe(sass().on("error", sass.logError))
     .pipe(gulp.dest("dist/css"));
 });
 
 gulp.task("process_js", () => {
-  //TODO: closure-compile and generate sourcemaps in a new "minimize-js" step
-  //google-closure-compiler --js *.js --js_output_file out.min
+  // import bootstrap.js
+  gulp
+    .src("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js")
+    .pipe(gulp.dest("dist/js"));
+  gulp
+    .src("node_modules/bootstrap/dist/js/bootstrap.bundle.min.js.map")
+    .pipe(gulp.dest("dist/js"));
+  // copy javascript source files
   return gulp.src("src/js/**/*.js").pipe(gulp.dest("dist/js"));
 });
 
@@ -87,8 +86,7 @@ gulp.task("watch", () => {
   )();
   gulp.watch("src/**/*.html", gulp.series("process_html"));
   gulp.watch("src/**/*.handlebars", gulp.series("process_html"));
-  gulp.watch("src/**/*.css", gulp.series("process_css"));
-  gulp.watch("tailwind.config.js", gulp.series("process_css"));
+  gulp.watch("src/**/*.scss", gulp.series("process_css"));
   gulp.watch("src/**/*.js", gulp.series("process_js"));
   return;
 });

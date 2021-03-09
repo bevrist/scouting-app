@@ -1,0 +1,12 @@
+// Your variable overrides go here
+// $body-bg: #000;
+// $body-color: #111;
+
+@import "node_modules/bootstrap/scss/bootstrap";
+
+.table-scroll {
+    position: absolute;
+    width: 50%;
+    white-space: nowrap;
+    overflow: scroll;
+}

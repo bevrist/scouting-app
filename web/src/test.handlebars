@@ -1,15 +1,66 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="css/styles.css" />
-  <title>Tailwind CSS Demo</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="stylesheet" href="css/styles.css">
+  <title>Hello, world!</title>
+  <script type="text/javascript" src="https://livejs.com/live.js"></script> {{!-- //FIXME: Remove --}}
 </head>
 
 <body>
-  {{> navbar}}
+  <script>
+    //serialize form fields into json object and return
+    function serializeForm() {
+      // // radios require a bit extra js to extract data
+      // var radioValue;
+      // var radios = document.getElementsByName("radioss");
+      // for (var i = 0; i < radios.length; i++) {
+      //   if (radios[i].checked) {
+      //     radioValue = radios[i].value;
+      //     // only one radio can be logically checked, don't check the rest
+      //     break;
+      //   }
+      // }
+
+      return {
+        ID: document.getElementById("uuid").value,
+        Uploaded: false,
+        CreationTime: Date.now(),
+        ScoutName: document.getElementById("nameInput").value,
+        TeamNumber: Number(document.getElementById("teamNumberInput").value),
+        Dropdown: document.getElementById("exampleRecipientInput").value,
+        TextBox: document.getElementById("textBoxInput").value,
+        Check1: document.getElementById("checkBox1").checked,
+        Check2: document.getElementById("checkBox2").checked,
+        Radio: radioValue,
+      };
+    }
+  </script>
+  <div class="container">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Column 1</th>
+            <th>Column 2</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Cell 1</td>
+            <td>Cell 2</td>
+          </tr>
+          <tr>
+            <td>Cell 3</td>
+            <td>Cell 4</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <script type="module" src="/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

@@ -3,9 +3,10 @@
 
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <link rel="stylesheet" href="css/styles.css" />
   <title>Scouting Site - Sync Page</title>
+  <script type="text/javascript" src="https://livejs.com/live.js"></script> {{!-- //FIXME: Remove --}}
 </head>
 
 <body>
@@ -13,103 +14,42 @@
   {{> navbar}}
 
   <!-- --------------------------------------------------------------------- -->
-  <script></script>
-  <script>
-    //serialize form fields into json object and return
-    function serializeForm() {
-      // // radios require a bit extra js to extract data
-      // var radioValue;
-      // var radios = document.getElementsByName("radioss");
-      // for (var i = 0; i < radios.length; i++) {
-      //   if (radios[i].checked) {
-      //     radioValue = radios[i].value;
-      //     // only one radio can be logically checked, don't check the rest
-      //     break;
-      //   }
-      // }
 
-      return {
-        ID: document.getElementById("uuid").value,
-        Uploaded: false,
-        CreationTime: Date.now(),
-        ScoutName: document.getElementById("nameInput").value,
-        TeamNumber: Number(document.getElementById("teamNumberInput").value),
-        Dropdown: document.getElementById("exampleRecipientInput").value,
-        TextBox: document.getElementById("textBoxInput").value,
-        Check1: document.getElementById("checkBox1").checked,
-        Check2: document.getElementById("checkBox2").checked,
-        Radio: radioValue,
-      };
-    }
-  </script>
-  <div class="mt-10 sm:mt-0">
-    <div class="md:grid md:gap-6">
-      <div class="mt-5 md:mt-0 md:col-span-2">
-        <form id="myform">
-          <div class="px-4 py-5 bg-white sm:p-6">
-            <div class="grid grid-cols-6 gap-6">
-              <div class="col-span-6 sm:col-span-3">
-                <label for="first_name" class="block text-sm font-medium text-gray-700">First name</label>
-                <input type="text" name="first_name" id="first_name" autocomplete="given-name" class="form-style" />
-              </div>
+  {{!-- <div class="container p-0"> --}}
+    <table class="table table-striped table-sm table-bordered ">
+      <thead>
+        <tr>
+          <th>Column 1</th>
+          <th>Column 2</th>
+        </tr>
+      </thead>
+      <tbody id="sync-status-table-body">
+        <tr>
+          <td>Cell 1</td>
+          <td>
+            <div></div>
+            <div class="table-scroll">Cell 2 fo hrjkfnjkr fhjk slfhdkl hfjkdls hfjdskal fhdsjkl fhsdjak lfhsjkl fhsdjakl
+              fdslfnmdsf dnas fnjkd aslfnjkdsa lfndjsl fndsaf ndsakfl sdjkalf sdjakfl sdajkf dsajkfn dkjsal nfal fhdsjak
+              lfdhsjkal>>></div>
+          </td>
+        </tr>
+        <tr>
+          <td>Cell 2</td>
+          <td>
+            <div></div>
+            <div class="table-scroll">Cell 2 fo hrjkfnjkr fhjk slfhdkl hfjkdls hfjdskal fhdsjkl fhsdjak lfhsjkl fhsdjakl
+              fdslfnmdsf dnas fnjkd aslfnjkdsa lfndjsl fndsaf ndsakfl sdjkalf sdjakfl sdajkf dsajkfn dkjsal nfal fhdsjak
+              lfdhsjkal>>></div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  {{!-- </div> --}}
 
-              <div class="col-span-6 sm:col-span-3">
-                <label for="last_name" class="block text-sm font-medium text-gray-700">Last name</label>
-                <input type="text" name="last_name" id="last_name" autocomplete="family-name" class="form-style" />
-              </div>
-
-              <div class="col-span-6 sm:col-span-4">
-                <label for="email_address" class="block text-sm font-medium text-gray-700">Email address</label>
-                <input type="text" name="email_address" id="email_address" autocomplete="email" class="form-style" />
-              </div>
-
-              <div class="col-span-6 sm:col-span-3">
-                <label for="country" class="block text-sm font-medium text-gray-700">Country / Region</label>
-                <select id="country" name="country" autocomplete="country"
-                  class="mt-1 block w-full py-2 px-3 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
-                  <option>United States</option>
-                  <option>Canada</option>
-                  <option>Mexico</option>
-                </select>
-              </div>
-
-              <div class="col-span-6">
-                <label for="street_address" class="block text-sm font-medium text-gray-700">Street address</label>
-                <input type="text" name="street_address" id="street_address" autocomplete="street-address"
-                  class="form-style" />
-              </div>
-
-              <div class="col-span-6 sm:col-span-6 lg:col-span-2">
-                <label for="city" class="block text-sm font-medium text-gray-700">City</label>
-                <input type="text" name="city" id="city" class="form-style" />
-              </div>
-
-              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label for="state" class="block text-sm font-medium text-gray-700">State / Province</label>
-                <input type="text" name="state" id="state" class="form-style" />
-              </div>
-
-              <div class="col-span-6 sm:col-span-3 lg:col-span-2">
-                <label for="postal_code" class="block text-sm font-medium text-gray-700">ZIP / Postal</label>
-                <input type="number" name="postal_code" id="postal_code" autocomplete="postal-code"
-                  class="form-style" />
-              </div>
-            </div>
-          </div>
-          <div class="px-4 py-3 text-right sm:px-6">
-            <button onclick="savebtn()" type="button"
-              class="inline-flex justify-center py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-              Save
-            </button>
-          </div>
-        </form>
-      </div>
-    </div>
-  </div>
   <!-- <script>
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', () => {
-        navigator.serviceWorker.register('sw.js')
+        navigator.serviceWorker.register('/sw.js')
           .then(registration => {
             console.log(`Service Worker registered! Scope: ${registration.scope}`);
           })
@@ -119,6 +59,7 @@
       });
     }
   </script> -->
+  <script type="module" src="/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

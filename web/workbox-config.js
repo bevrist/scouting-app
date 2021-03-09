@@ -10,14 +10,14 @@ module.exports = {
     {
       // Match any request that ends with .png, .jpg, .jpeg or .svg.
       urlPattern: /\.(?:png|jpg|jpeg|svg)$/,
-      // Apply a cache-first strategy.
-      handler: "CacheFirst",
+      // Apply a stale-while-revalidate strategy.
+      handler: "StaleWhileRevalidate",
       options: {
         // Use a custom cache name.
         cacheName: "images",
-        // Only cache 10 images.
+        // Only cache 25 images.
         expiration: {
-          maxEntries: 10,
+          maxEntries: 25,
         },
       },
     },
