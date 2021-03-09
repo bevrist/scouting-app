@@ -1,5 +1,7 @@
 package main
 
+//TODO: Experiment with golang FS embedding the website into the binary
+
 import (
 	"bytes"
 	"encoding/json"

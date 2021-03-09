@@ -1,3 +1,8 @@
 .DS_Store
 .vscode/*
 forms.json
+
+node_modules
+dist
+npm-debug.log
+
