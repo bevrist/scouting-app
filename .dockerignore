@@ -1,6 +1,6 @@
-Dockerfile
-dist/
-node_modules/
-.git*
-*.md
+web/dist/
+web/node_modules/
+**/Dockerfile
+**/.git*
+**/*.md
 

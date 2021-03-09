@@ -17,11 +17,10 @@ console.log("tailwindcss");
 const tailwindcss = require("tailwindcss");
 console.log("workbox-build");
 const workboxBuild = require("workbox-build");
+console.log("loaded!");
 
-console.log("loading configs...");
 var tailwindConfig = require("./tailwind.config.js");
 var workboxConfig = require("./workbox-config.js");
-console.log("loaded!");
 
 // define gulp tasks
 
@@ -49,13 +48,13 @@ gulp.task("process_js", () => {
 
 gulp.task("process_html", () => {
   options = {
-    batch: ["./src/partials"],
+    batch: ["./src/_partials"],
   };
 
-  gulp.src(["src/**/*.html", "!src/partials/**/*"]).pipe(gulp.dest("dist"));
+  gulp.src(["src/**/*.html", "!src/_partials/**/*"]).pipe(gulp.dest("dist"));
 
   return gulp
-    .src(["src/**/*.handlebars", "!src/partials/**/*"])
+    .src(["src/**/*.handlebars", "!src/_partials/**/*"])
     .pipe(handlebars(null, options))
     .pipe(
       rename(function (path) {
